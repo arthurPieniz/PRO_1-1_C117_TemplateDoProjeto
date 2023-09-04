@@ -3,9 +3,13 @@ $(document).ready(function(){
     console.log('Ready')
 
     //  Busque a data atual e atualize-a no DOM
-
-
-
+    var date = new Date()
+    let display_date= "Data:" + date.toLocaleDateString()
+    
+    $(document).ready(function () {
+        $("#display_date").html(display_date)
+        $('#save_button').prop('disabled', true);
+    })
 
     // Escreva um evento, quando o botão Enviar for clicado
     $('').click(function(){
@@ -35,14 +39,12 @@ $(document).ready(function(){
 
             //  se tudo funcionar, execute esta função
             success : function(result){
-
-                // extraia previsão e a URL do emoticon do resultado
-
-
-                //  atualize os elementos DOM
-
-
-                //  exiba-os
+                $("#prediction").html(result.data.predicted_emotion)
+                $("#emo_img_url").attr('src', result.data.predicted_emotion_img_url);
+                $('#prediction').css("display", "");
+                $('#emo_img_url').css("display", "");
+                predicted_emotion = result.data.predicted_emotion
+                $('#save_button').prop('disabled', false);
 
             },
 
